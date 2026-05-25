@@ -1,0 +1,12 @@
+---
+description: FastAPI backend conventions for ai-monitoring
+globs: **/*.py
+alwaysApply: true
+---
+
+# Backend conventions
+
+- FastAPI app lives under `app/`; entry: `uvicorn app.main:app`.
+- Auth: federated login via `POST /api/auth/login` (google, yahoo, microsoft).
+- Persist users in SQLAlchemy `users` table; return `UserResponse` + JWT to frontend.
+- Use Pydantic schemas in `app/schemas/`; routes in `app/routers/`.
