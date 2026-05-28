@@ -10,3 +10,7 @@ alwaysApply: true
 - Auth: federated login via `POST /api/auth/login` (google, yahoo, microsoft).
 - Persist users in SQLAlchemy `users` table; return `UserResponse` + JWT to frontend.
 - Use Pydantic schemas in `app/schemas/`; routes in `app/routers/`.
+
+
+#Task
+How and where should I setup the database_url in this project from railway?

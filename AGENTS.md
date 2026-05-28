@@ -13,7 +13,7 @@ Python FastAPI service for AI monitoring with federated email login.
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env
+set DATABASE_URL=postgresql+psycopg://USER:PASSWORD@HOST/DBNAME?sslmode=require
 python main.py
 ```
 
