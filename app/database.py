@@ -13,10 +13,16 @@ if not settings.database_url.strip():
         "(or use `railway run ...` to inject Railway variables locally)."
     )
 
-database_url = settings.database_url
-if database_url.startswith("postgres://"):
-    # Railway/Neon URLs may use postgres://; SQLAlchemy expects postgresql://
-    database_url = database_url.replace("postgres://", "postgresql://", 1)
+def _normalize_database_url(url: str) -> str:
+    """Use psycopg v3 (installed) instead of SQLAlchemy's default psycopg2 driver."""
+    if url.startswith("postgres://"):
+        return "postgresql+psycopg://" + url[len("postgres://") :]
+    if url.startswith("postgresql://"):
+        return "postgresql+psycopg://" + url[len("postgresql://") :]
+    return url
+
+
+database_url = _normalize_database_url(settings.database_url)
 
 if database_url.startswith("sqlite"):
     Path("data").mkdir(parents=True, exist_ok=True)
